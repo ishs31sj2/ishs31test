@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>퀴즈 출제기</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Include Chart.js library -->
+</head>
+<body onload="showLogin()">
+    <div class="quiz-container">
+        <h1>퀴즈 출제기</h1>
+        <nav id="breadcrumbs">
+            <a href="#" onclick="showLogin()">홈</a>
+        </nav>
+        <div id="usr-login">
+            <h2>로그인</h2>
+            <input type="text" id="username" placeholder="사용자 이름">
+            <input type="password" id="password" placeholder="비밀번호">
+            <button onclick="login()">로그인</button>
+            <p id="login-res"></p>
+            
+            <h2>계정 생성</h2>
+            <input type="text" id="new-username" placeholder="새 사용자 이름">
+            <input type="password" id="new-password" placeholder="새 비밀번호">
+            <button onclick="register()">계정 생성</button>
+            <p id="register-res"></p>
+        </div>
+        
+        <div id="quiz-tiles" style="display:none;">
+            <h2>퀴즈 파일 선택</h2>
+            <div class="tile" onclick="selectFile('Quiz DB1.txt')">퀴즈 DB1</div>
+            <div class="tile" onclick="selectFile('Quiz DB2.txt')">퀴즈 DB2</div>
+            <div class="tile" onclick="selectFile('Quiz DB3.txt')">퀴즈 DB3</div>
+            <div class="tile" onclick="selectFile('Quiz DB4.txt')">퀴즈 DB4</div>
+            <div class="tile" onclick="selectFile('Quiz DB5.txt')">퀴즈 DB5</div>
+        </div>
+        
+        <div id="actions" style="display:none;">
+            <h2>동작 선택</h2>
+            <button onclick="playQuiz()">퀴즈 플레이</button>
+            <button onclick="showEdit()">데이터 추가</button>
+        </div>
+
+        <div id="quiz" style="display:none;">
+            <p id="question">문제가 여기에 표시됩니다.</p>
+            <input type="text" id="ans1" placeholder="첫 번째 답을 입력하세요">
+            <input type="text" id="ans2" placeholder="두 번째 답을 입력하세요" style="display:none;">
+            <input type="text" id="ans3" placeholder="세 번째 답을 입력하세요" style="display:none;">
+            <input type="text" id="ans4" placeholder="네 번째 답을 입력하세요" style="display:none;">
+            <input type="text" id="ans5" placeholder="다섯 번째 답을 입력하세요" style="display:none;">
+            <input type="text" id="ans6" placeholder="여섯 번째 답을 입력하세요" style="display:none;">
+            <input type="text" id="ans7" placeholder="일곱 번째 답을 입력하세요" style="display:none;">
+            <button onclick="checkAnswer()">제출</button>
+            <p id="result"></p>
+            <button id="next-ques" onclick="nextQuestion()" style="display:none; margin-right: 10px;">다음 문제</button>
+            <button id="end-quiz" onclick="endQuiz()" style="display:none; margin-top: 10px;">퀴즈 끝내기</button>
+        </div>
+    </div>
+    
+    <div class="stats-cont" style="display:none;">
+        <h2>퀴즈 통계</h2>
+        <p>정답률: <span id="accuracy">0</span>%</p>
+        <p>틀린 문제 목록:</p>
+        <ul id="wrong-anss"></ul>
+        <p>시간: <span id="timer">00:00</span></p>
+    </div>
+    
+    <div id="edit" style="display:none;">
+        <h2>새 퀴즈 추가</h2>
+        <input type="text" id="new-ques" placeholder="새 질문 입력">
+        <input type="text" id="new-ans" placeholder="정답 입력 (쉼표로 구분)">
+        <input type="text" id="new-info" placeholder="추가 정보 (선택)">
+        <button onclick="addQuiz()">추가</button>
+        <h2>현재 퀴즈 목록</h2>
+        <ul id="quiz-list"></ul>
+    </div>
+    
+    <div id="results" style="display:none;">
+        <div>
+            <h2>퀴즈 결과</h2>
+            <p id="total-tm"></p>
+            <p id="total-acc"></p>
+            <ul id="results-list"></ul>
+        </div>
+        <div>
+            <h2>연속 정답 리더보드</h2>
+            <ul id="streak-leaderboard" class="leaderboard-container"></ul>
+            <h2>시간 리더보드</h2>
+            <ul id="time-leaderboard" class="leaderboard-container"></ul>
+        </div>
+        <div>
+            <h2>정답 및 오답 분석</h2>
+            <canvas id="results-chart" width="400" height="200"></canvas>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

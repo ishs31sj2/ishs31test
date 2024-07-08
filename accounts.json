@@ -1,0 +1,8 @@
+{
+  "admin": {
+    "password": "$2b$10$tu72dsoUFh8XVFq57kRPS.Wud8qlz37NNDtPNGSL0l6zS9vGg2Jhu"
+  },
+  "test": {
+    "password": "$2b$10$52WiJ315C4HNzMb9NsZeOO7mw807qUySwZqb5.PuEQWL7tQi.1s5a"
+  }
+}
